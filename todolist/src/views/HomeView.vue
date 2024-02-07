@@ -1,15 +1,18 @@
 <template>
   <!-- 编写html内容 -->
   <!-- 1.子组件引入 -->
-  <!-- <nav-header></nav-header>
+  <nav-header></nav-header>
   <nav-main></nav-main>
-  <nav-footer></nav-footer> -->
+  <nav-footer></nav-footer>
 
   <!-- 2. ref定义数据 or reactive + torefs -->
-  <div>
+  <!-- <div @click="clickNum">
     {{ num }}
   </div>
-  <div>
+  <div @click="clickNum1">
+    {{ num1 }}
+  </div> -->
+  <!-- <div>
     {{ name }}
   </div>
   <div>
@@ -17,7 +20,7 @@
   </div>
   <div>
     {{ obj }}
-  </div>
+  </div> -->
 
   <!-- 3. reactive 定义对象 -->
   <!-- <div>
@@ -61,6 +64,7 @@ export default defineComponent({
     // let obj = ref({
     //   age: 20
     // })
+    let num1 = ref(20)
     let data = reactive({
       num: 10,
       name: 'jack',
@@ -70,6 +74,16 @@ export default defineComponent({
       },
       arr: ['a', 'b', 'c', 'd']
     })
+    // 定义方法
+    let clickNum = () => {
+      // 访问reactive定义的数据，要写对象的属性名的形式
+      console.log(data.num)
+    }
+    let clickNum1 = () => {
+      // 访问ref定义的数据，要写数据名.value形式
+      console.log(num1.value)
+    }
+
     return {
       // num,
       // name,
@@ -77,7 +91,10 @@ export default defineComponent({
       // obj
 
       // data
-      ...toRefs(data)
+      ...toRefs(data),
+      num1,
+      clickNum,
+      clickNum1
     }
   }
 })
