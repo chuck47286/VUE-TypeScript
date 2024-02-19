@@ -66,7 +66,7 @@ export default defineComponent({
             right: 20px;
             top: 6px;
             display: none;
-            // z-index: 99;
+            z-index: 99;
         }
         &:hover{
             background: #ddd;
