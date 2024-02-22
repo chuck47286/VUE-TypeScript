@@ -2,9 +2,9 @@
     <!-- 编写html内容 -->
     <div>
         <input 
-        placeholder="请输入任务名称" 
-        v-model="value" 
-        @keydown.enter="enter"
+        placeholder='请输入任务名称' 
+        v-model='value'
+        @keydown.enter='enter'
         />
     </div>
 </template>
@@ -24,11 +24,14 @@ export default defineComponent({
     components: {
 
     },
+    emits: ['add'],
     setup(props, ctx) {
         let value = ref('')
         // 按回车确认
         let enter = () => {
-            console.log(value.value)
+          ctx.emit('add', value.value);
+          // 清空复选框
+          value.value = ''
         }
         return {
             value,

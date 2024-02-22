@@ -3,20 +3,11 @@ import { createStore } from 'vuex'
 export default createStore({
   // 定义所需要的状态(全局的，即使不是父子组件也可实现)
   state: {
-    list: [
-      {
-        title: '吃饭',
-        complete: false
-      },
-      {
-        title: '睡觉',
-        complete: false
-      },
-      {
-        title: '敲代码',
-        complete: true
-      }
-    ]
+    list: JSON.parse(sessionStorage.getItem('list')) || [
+      { title: '吃饭', complete: false },
+      { title: '睡觉', complete: false },
+      { title: '敲代码', complete: false }
+    ],
   },
   getters: {
   },
@@ -35,6 +26,10 @@ export default createStore({
     clear(state, payload) {
       // 过滤之后的数组传进来
       state.list = payload
+    },
+    // 可能需要一个mutation来手动触发更新localStorage的操作
+    updateLocalStorage(state) {
+      sessionStorage.setItem('list', JSON.stringify(state.list));
     }
   },
   // 异步提交mutation
